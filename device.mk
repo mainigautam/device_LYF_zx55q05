@@ -397,5 +397,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vndk-sp
 
+# Animation
+PRODUCT_COPY_FILES += device/LYF/mobee01a/bootanimation.zip:system/media/bootanimation.zip
+
+# APN(s)
+PRODUCT_COPY_FILES += device/LYF/mobee01a/apns-conf.xml:system/etc/apns-conf.xml
+
 # Call the proprietary setup
 $(call inherit-product, vendor/LYF/mobee01a/mobee01a-vendor.mk)
