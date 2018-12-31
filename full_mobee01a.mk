@@ -21,6 +21,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Inherit from mobee01a device
 $(call inherit-product, device/LYF/mobee01a/device.mk)
 
+# Gapps
+$(call inherit-product, device/LYF/mobee01a/gapps.mk)
+
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := mobee01a
 PRODUCT_NAME := full_mobee01a
