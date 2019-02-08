@@ -312,7 +312,7 @@ PRODUCT_PACKAGES += \
     camera.msm8916 \
     libmm-qcamera \
     libboringssl-compat \
-    GoogleCamera
+    Camera2
 
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl \
@@ -398,7 +398,7 @@ PRODUCT_PACKAGES += \
     vndk-sp
 
 # Animation
-PRODUCT_COPY_FILES += device/LYF/mobee01a/bootanimation.zip:system/media/bootanimation.zip
+#PRODUCT_COPY_FILES += device/LYF/mobee01a/bootanimation.zip:system/media/bootanimation.zip
 
 # APN(s)
 PRODUCT_COPY_FILES += device/LYF/mobee01a/apns-conf.xml:system/etc/apns-conf.xml

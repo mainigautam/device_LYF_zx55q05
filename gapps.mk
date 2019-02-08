@@ -1,3 +1,9 @@
+
+#Messaging
+PRODUCT_PACKAGES += \
+    messaging
+
+
 # GAPPS
 GAPPS_VARIANT := nano
 $(call inherit-product-if-exists, vendor/opengapps/build/opengapps-packages.mk)
