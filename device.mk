@@ -14,14 +14,7 @@
 # limitations under the License.
 #
 
-# Overlay
-DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay \
-    $(LOCAL_PATH)/overlay-lineage
-
-PRODUCT_ENFORCE_RRO_TARGETS := framework-res
-
 # Include product configs
-include $(LOCAL_PATH)/nx511j.mk
+include $(LOCAL_PATH)/zx55q05.mk
 
-$(call inherit-product, vendor/nubia/nx511j/nx511j-vendor.mk)
+$(call inherit-product, vendor/LYF/zx55q05/zx55q05-vendor.mk)

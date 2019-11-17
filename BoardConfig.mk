@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-PLATFORM_PATH := device/nubia/nx511j
+PLATFORM_PATH := device/LYF/zx55q05
 
 # Platform
 TARGET_BOARD_PLATFORM := msm8916
@@ -23,7 +23,7 @@ TARGET_BOOTLOADER_BOARD_NAME := MSM8916
 TARGET_NO_BOOTLOADER := true
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := NX511J,nx511j
+TARGET_OTA_ASSERT_DEVICE := zx55q05,LS-5504
 
 # Ant
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
@@ -83,17 +83,27 @@ TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
 TARGET_HW_DISK_ENCRYPTION := true
 TARGET_KEYMASTER_WAIT_FOR_QSEE := true
 
-# Dexopt
+# Dex optimizion
 ifeq ($(HOST_OS),linux)
-    ifneq ($(TARGET_BUILD_VARIANT),eng)
-        ifeq ($(WITH_DEXPREOPT),)
-            WITH_DEXPREOPT := true
-            WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := true
-        endif
-    endif
+ ifneq ($(TARGET_BUILD_VARIANT),eng)
+   WITH_DEXPREOPT := true
+   WITH_DEXPREOPT_DEBUG_INFO := false
+   USE_DEX2OAT_DEBUG := false
+   DONT_DEXPREOPT_PREBUILTS := true
+   WITH_DEXPREOPT_PIC := true
+   WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := true
+ endif
 endif
+PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
+PRODUCT_ALWAYS_PREOPT_EXTRACTED_APK := true
+PRODUCT_USE_PROFILE_FOR_BOOT_IMAGE := true
+PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION := frameworks/base/config/boot-image-profile.txt
+PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
+PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
+PRODUCT_DEXPREOPT_SPEED_APPS += SystemUI
 
-# Display
+
+#Display
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
@@ -108,12 +118,12 @@ PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # Filesystem
-TARGET_EXFAT_DRIVER := exfat
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 TARGET_USES_MKE2FS := true
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_FS_CONFIG_GEN := $(PLATFORM_PATH)/config.fs
+
 
 # GPS
 TARGET_NO_RPC := true
@@ -124,16 +134,6 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 BACKLIGHT_PATH := /sys/class/leds/lcd-backlight/brightness
 
-# Lineagehw
-JAVA_SOURCE_OVERLAYS := \
-    org.lineageos.hardware|$(PLATFORM_PATH)/lineagehw|**/*.java
-
-# Double tap to wake gesture
-TARGET_TAP_TO_WAKE_NODE := "/data/tp/easy_wakeup_gesture"
-
-#Real time battery charging 
-BOARD_GLOBAL_CFLAGS += -DBATTERY_REAL_INFO
-
 # Init
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 
@@ -143,21 +143,15 @@ BOARD_HAVE_QCOM_FM := true
 TARGET_QCOM_NO_FM_FIRMWARE := true
 
 # Kernel
-BOARD_DTBTOOL_ARGS := -2
+BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 loop.max_part=7
-#BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive #selinux to permissive switch
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_KERNEL_SEPARATED_DT := true
 BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
 BOARD_RAMDISK_OFFSET     := 0x02000000
-TARGET_KERNEL_SOURCE := kernel/nubia/nx511j
-ENABLE_CPUSETS := true
-BOARD_KERNEL_IMAGE_NAME := Image-dtb
-TARGET_KERNEL_CONFIG := lineageos_nx511j_defconfig
-TARGET_KERNEL_ARCH := arm64
-TARGET_KERNEL_HEADER_ARCH := arm64
 LZMA_RAMDISK_TARGETS := recovery
+TARGET_KERNEL_SOURCE := kernel/LYF/zx55q05
+TARGET_KERNEL_CONFIG := zx55q05_defconfig
 
 # Keylayout
 PRODUCT_COPY_FILES := $(filter-out frameworks/base/data/keyboards/Generic.kl:system/usr/keylayout/Generic.kl , $(PRODUCT_COPY_FILES))
@@ -170,12 +164,13 @@ MALLOC_SVELTE := true
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 131072
-BOARD_BOOTIMAGE_PARTITION_SIZE := 33554432
-BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
-BOARD_PERSISTIMAGE_PARTITION_SIZE := 8388608
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 33554432
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2181038080 # new minimal size after repartition
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 12184911360 # new minimal real 12184927744-16384 for crypto footer
+BOARD_BOOTIMAGE_PARTITION_SIZE := 0x0002000000
+BOARD_CACHEIMAGE_PARTITION_SIZE := 0x0010000000
+BOARD_PERSISTIMAGE_PARTITION_SIZE := 0x0002000000
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x0002000000
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x0060000000
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x0311bfbe00
+
 
 # Properties
 TARGET_SYSTEM_PROP += $(PLATFORM_PATH)/system.prop
@@ -198,15 +193,14 @@ TARGET_RIL_VARIANT := caf
 TARGET_RECOVERY_DENSITY := xxhdpi
 TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/rootdir/etc/fstab.full
 TARGET_RECOVERY_PIXEL_FORMAT := ABGR_8888
-TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_cm
 
 # Release tools
 TARGET_RELEASETOOLS_EXTENSIONS := $(PLATFORM_PATH)
 
 #SElinux
-include device/qcom/sepolicy-legacy/sepolicy.mk
+#include device/qcom/sepolicy-legacy/sepolicy.mk
 
-BOARD_SEPOLICY_DIRS += \
+#BOARD_SEPOLICY_DIRS += \
     $(PLATFORM_PATH)/sepolicy
 
 #SDClang
@@ -217,20 +211,6 @@ TARGET_LD_SHIM_LIBS := /vendor/lib/libqomx_jpegenc.so|libboringssl-compat.so \
     /vendor/lib/hw/camera.msm8916.so|libzte_camera.so \
     /vendor/lib/libskia.so|libshim_skia.so
 
-# Shipping API
-#PRODUCT_SHIPPING_API_LEVEL := 22
-
-# Treble
-#BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
-#BOARD_VNDK_RUNTIME_DISABLE := true
-#BOARD_VNDK_VERSION := current
-#PRODUCT_FULL_TREBLE_OVERRIDE := true
-PRODUCT_VENDOR_MOVE_ENABLED := true
-# build a separate vendor.img
-TARGET_COPY_OUT_VENDOR := vendor
-BOARD_USES_VENDORIMAGE := true
-BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_VENDORIMAGE_PARTITION_SIZE := 536870912 # vendor size after repartition
 
 # VNDK-SP:
 PRODUCT_PACKAGES += \

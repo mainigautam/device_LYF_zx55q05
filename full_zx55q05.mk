@@ -12,6 +12,21 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
 
-PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/one_zx55q05.mk
+# Inherit from those products. Most specific first.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+
+# Inherit from nx511j device
+$(call inherit-product, device/LYF/zx55q05/device.mk)
+
+# Device identifier. This must come after all inclusions
+PRODUCT_DEVICE := zx55q05
+PRODUCT_NAME := full_zx55q05
+PRODUCT_BRAND := LYF
+PRODUCT_MODEL := Water-7
+PRODUCT_MANUFACTURER := ZTE
+
+
+

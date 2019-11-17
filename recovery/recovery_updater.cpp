@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2015-2016, The CyanogenMod Project
- * Copyright (C) 2017 The LineageOS Project
+ * Copyright (C) 2015, The CyanogenMod Project
+ * Copyright (C) 2017, The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,13 +35,16 @@
 #define MAX(a, b) (((a) > (b)) ? (a) : (b))
 
 #define ALPHABET_LEN 256
-#define KB 1024
+
+#define BASEBAND_PART_PATH "/dev/block/platform/soc.0/7824900.sdhci/by-name/modem"
+#define BASEBAND_VER_STR_START "QC_IMAGE_VERSION_STRING=MPSS.DPM."
+#define BASEBAND_VER_STR_START_LEN 33
+#define BASEBAND_VER_BUF_LEN 255
 
 #define TZ_PART_PATH "/dev/block/platform/soc.0/7824900.sdhci/by-name/tz"
 #define TZ_VER_STR "QC_IMAGE_VERSION_STRING="
 #define TZ_VER_STR_LEN 24
 #define TZ_VER_BUF_LEN 255
-#define TZ_SZ 500 * KB    /* MMAP 500K of TZ, TZ partition is 500K */
 
 /* Boyer-Moore string search implementation from Wikipedia */
 
@@ -121,9 +124,50 @@ static char * bm_search(const char *str, size_t str_len, const char *pat,
     return NULL;
 }
 
+static int get_baseband_version(char *ver_str, size_t len) {
+    int ret = 0;
+    int fd;
+    int baseband_size;
+    char *baseband_data = NULL;
+    char *offset = NULL;
+
+    fd = open(BASEBAND_PART_PATH, O_RDONLY);
+    if (fd < 0) {
+        ret = errno;
+        goto err_ret;
+    }
+
+    baseband_size = lseek64(fd, 0, SEEK_END);
+    if (baseband_size == -1) {
+        ret = errno;
+        goto err_fd_close;
+    }
+
+    baseband_data = (char *) mmap(NULL, baseband_size, PROT_READ, MAP_PRIVATE, fd, 0);
+    if (baseband_data == (char *)-1) {
+        ret = errno;
+        goto err_fd_close;
+    }
+
+    /* Do Boyer-Moore search across BASEBAND data */
+    offset = bm_search(baseband_data, baseband_size, BASEBAND_VER_STR_START, BASEBAND_VER_STR_START_LEN);
+    if (offset != NULL) {
+        strncpy(ver_str, offset + BASEBAND_VER_STR_START_LEN, len);
+    } else {
+        ret = -ENOENT;
+    }
+
+    munmap(baseband_data, baseband_size);
+err_fd_close:
+    close(fd);
+err_ret:
+    return ret;
+}
+
 static int get_tz_version(char *ver_str, size_t len) {
     int ret = 0;
     int fd;
+    int tz_size;
     char *tz_data = NULL;
     char *offset = NULL;
 
@@ -133,48 +177,81 @@ static int get_tz_version(char *ver_str, size_t len) {
         goto err_ret;
     }
 
-    tz_data = (char *) mmap(NULL, TZ_SZ, PROT_READ, MAP_PRIVATE, fd, 0);
+    tz_size = lseek64(fd, 0, SEEK_END);
+    if (tz_size == -1) {
+        ret = errno;
+        goto err_fd_close;
+    }
+
+    tz_data = (char *) mmap(NULL, tz_size, PROT_READ, MAP_PRIVATE, fd, 0);
     if (tz_data == (char *)-1) {
         ret = errno;
         goto err_fd_close;
     }
 
     /* Do Boyer-Moore search across TZ data */
-    offset = bm_search(tz_data, TZ_SZ, TZ_VER_STR, TZ_VER_STR_LEN);
+    offset = bm_search(tz_data, tz_size, TZ_VER_STR, TZ_VER_STR_LEN);
     if (offset != NULL) {
         strncpy(ver_str, offset + TZ_VER_STR_LEN, len);
     } else {
         ret = -ENOENT;
     }
 
-    munmap(tz_data, TZ_SZ);
+    munmap(tz_data, tz_size);
 err_fd_close:
     close(fd);
 err_ret:
     return ret;
 }
 
-/* verify_trustzone("TZ_VERSION", "TZ_VERSION", ...) */
-Value * VerifyTrustZoneFn(const char *name, State *state,
+/* verify_baseband("BASEBAND_VERSION", "BASEBAND_VERSION", ...) */
+Value * VerifyBasebandFn(const char *name, State *state,
                      const std::vector<std::unique_ptr<Expr>>& argv) {
-    char current_tz_version[TZ_VER_BUF_LEN];
-    char *tz_version;
+    char current_baseband_version[BASEBAND_VER_BUF_LEN];
     int ret;
 
-    ret = get_tz_version(current_tz_version, TZ_VER_BUF_LEN);
+    ret = get_baseband_version(current_baseband_version, BASEBAND_VER_BUF_LEN);
     if (ret) {
-        return ErrorAbort(state, kArgsParsingFailure, "%s() failed to read current TZ version: %d",
+        return ErrorAbort(state, kFreadFailure, "%s() failed to read current baseband version: %d",
                 name, ret);
     }
 
     std::vector<std::string> args;
     if (!ReadArgs(state, argv, &args)) {
-        return ErrorAbort(state, kArgsParsingFailure,
-                "%s() error parsing arguments", name);
+        return ErrorAbort(state, kArgsParsingFailure, "%s() error parsing arguments", name);
     }
 
+    ret = 0;
+    for (auto& baseband_version : args) {
+        if (strncmp(baseband_version.c_str(), current_baseband_version, strlen(baseband_version.c_str())) == 0) {
+            ret = 1;
+            break;
+        }
+    }
+
+    return StringValue(strdup(ret ? "1" : "0"));
+}
+
+/* verify_trustzone("TZ_VERSION", "TZ_VERSION", ...) */
+Value * VerifyTrustZoneFn(const char *name, State *state,
+                     const std::vector<std::unique_ptr<Expr>>& argv) {
+    char current_tz_version[TZ_VER_BUF_LEN];
+    int ret;
+
+    ret = get_tz_version(current_tz_version, TZ_VER_BUF_LEN);
+    if (ret) {
+        return ErrorAbort(state, kFreadFailure, "%s() failed to read current TZ version: %d",
+                name, ret);
+    }
+
+    std::vector<std::string> args;
+    if (!ReadArgs(state, argv, &args)) {
+        return ErrorAbort(state, kArgsParsingFailure, "%s() error parsing arguments", name);
+    }
+
+    ret = 0;
     for (auto& tz_version : args) {
-        if (tz_version == current_tz_version) {
+        if (strncmp(tz_version.c_str(), current_tz_version, strlen(tz_version.c_str())) == 0) {
             ret = 1;
             break;
         }
@@ -184,5 +261,6 @@ Value * VerifyTrustZoneFn(const char *name, State *state,
 }
 
 void Register_librecovery_updater_cm() {
+    RegisterFunction("cm.verify_baseband", VerifyBasebandFn);
     RegisterFunction("cm.verify_trustzone", VerifyTrustZoneFn);
 }

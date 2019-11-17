@@ -1,8 +1,8 @@
 # Android fstab file.
-# The filesystem that contains the filesystem e2fsck binary (typically /system) cannot
-# specify 'check', and must come before any filesystems that do specify 'check'
+# The filesystem that contains the filesystem checker binary (typically /system) cannot
+# specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
 
-/dev/block/bootdevice/by-name/vendor         /vendor      ext4    ro,barrier=1                                                wait,recoveryonly
+/dev/block/bootdevice/by-name/system         /system      ext4    ro,barrier=1                                                wait,recoveryonly
 /dev/block/bootdevice/by-name/userdata       /data        f2fs    nosuid,nodev,noatime,inline_xattr                           wait,check,formattable,encryptable=footer
 /dev/block/bootdevice/by-name/userdata       /data        ext4    noatime,nosuid,nodev,barrier=1,noauto_da_alloc              wait,check,formattable,encryptable=footer
 /dev/block/bootdevice/by-name/cache          /cache       f2fs    nosuid,nodev,noatime,inline_xattr                           wait,check,formattable
@@ -15,5 +15,4 @@
 
 /devices/soc.0/7864900.sdhci/mmc_host*       auto         auto    defaults                                                    voldmanaged=sdcard1:auto,encryptable=userdata
 /devices/platform/msm_hsusb*                 auto         auto    defaults                                                    voldmanaged=usb:auto
-/dev/block/zram0                             none         swap    defaults zramsize=536870912,notrim,max_comp_streams=4
 

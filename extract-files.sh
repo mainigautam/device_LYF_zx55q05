@@ -18,8 +18,8 @@
 
 set -e
 
-DEVICE=nx511j
-VENDOR=nubia
+DEVICE=zx55q05
+VENDOR=LYF
 
 # Load extract_utils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"
