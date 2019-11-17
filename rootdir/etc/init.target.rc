@@ -201,6 +201,12 @@ on boot
     chown system system /sys/class/leds/keyboard-backlight/brightness
     chown system system /sys/class/leds/lcd-backlight/brightness
     chown system system /sys/class/leds/jogball-backlight/brightness
+    
+     # Torch
+    chown system camera /sys/class/leds/torch-light0/brightness
+    chown system camera /sys/class/leds/flashlight/brightness
+    chmod 0660 /sys/class/leds/torch-light0/brightness
+    chmod 0660 /sys/class/leds/flashlight/brightness
 
     # Enable writing to led blink node from userspace
     chown system system /sys/class/leds/nubia_led/blink_mode
