@@ -17,7 +17,7 @@
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
 
-#define BTM_DEF_LOCAL_NAME   "Nubia Z9 mini"
+#define BTM_DEF_LOCAL_NAME   "LS-5504"
 #define BLUETOOTH_QTI_SW TRUE
 
 #endif
