@@ -188,6 +188,8 @@ TARGET_HAS_LEGACY_POWER_STATS := true
 TARGET_HAS_NO_WLAN_STATS := true
 TARGET_USES_INTERACTION_BOOST := true
 TARGET_RIL_VARIANT := caf
+TARGET_USES_INTERACTION_BOOST := true
+TARGET_POWERHAL_VARIANT := qcom
 
 # Recovery
 TARGET_RECOVERY_DENSITY := xxhdpi
@@ -236,4 +238,4 @@ WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 
 # Inherit from proprietary files
--include vendor/nubia/nx511j/BoardConfigVendor.mk
+-include vendor/LYF/zx55q05/BoardConfigVendor.mk

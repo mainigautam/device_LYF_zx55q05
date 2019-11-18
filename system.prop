@@ -86,7 +86,7 @@ ril.subscription.types=NV,RUIM
 ro.telephony.ril.config=simactivation,sim2gsmonly
 
 # Storage
-ro.sys.sdcardfs=false
+ro.sys.sdcardfs=true
 
 # USB
 ro.usb.id.midi=90BA

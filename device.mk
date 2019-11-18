@@ -14,6 +14,10 @@
 # limitations under the License.
 #
 
+# Overlay
+DEVICE_PACKAGE_OVERLAYS += \
+    $(LOCAL_PATH)/overlay 
+
 # Include product configs
 include $(LOCAL_PATH)/zx55q05.mk
 
