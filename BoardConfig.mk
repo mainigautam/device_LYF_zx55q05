@@ -66,18 +66,11 @@ BLUETOOTH_HCI_USE_MCT := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(PLATFORM_PATH)/bluetooth
 
 # Camera
-BOARD_QTI_CAMERA_32BIT_ONLY := true
+BOARD_CAMERA_SENSORS := gc0310 hi256 imglib imx132 imx134 imx135 imx214 mt9m114 ov13850_q13v06k ov13850 ov16825 ov2680_5987fhq ov2680_cht852b ov2680 ov2680_zs2p80f1 ov2685 ov2720 ov5645 ov5648_oty5f03 ov5648_p5v18g ov5648_q5v22e ov5670_30010a3 ov5670_q5v41b ov5670_qc700 ov7695 ov8825 ov8858_q8v19w_30 ov8858_q8v19w ov8858 ov8865_q8v18a ov9724 pdafcamif pdaf s5k3l1yx s5k3m2xm S5K4E1_13P1BA s5k5e2_F5E2YAU s5k5e2_SFS5C7597 SKUAA_ST_gc0339 skuab_shinetech_gc0339 SKUAB_ST_s5k4e1 skuf_ov12830_p12v01c skuf_ov5648_p5v23c sp1628 t4kb3
 USE_DEVICE_SPECIFIC_CAMERA := true
-TARGET_HAS_LEGACY_CAMERA_HAL1 := true
-BOARD_GLOBAL_CFLAGS += -DCAMERA_VENDOR_L_COMPAT
 TARGET_NEEDS_LEGACY_CAMERA_HAL1_DYN_NATIVE_HANDLE := true
-TARGET_USES_MEDIA_EXTENSIONS := true
-TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
-BOARD_CAMERA_SENSORS := imx234 imx179
-
 TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
-	/vendor/bin/mm-qcamera-daemon=25 \
-    /system/bin/mediaserver=25
+    /system/vendor/bin/mm-qcamera-daemon=23
 
 # Crypto
 TARGET_HW_DISK_ENCRYPTION := true
@@ -145,7 +138,7 @@ TARGET_QCOM_NO_FM_FIRMWARE := true
 # Kernel
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 BOARD_KERNEL_BASE := 0x80000000
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 loop.max_part=7
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 loop.max_part=7 androidboot.selinux=permissive
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
 BOARD_RAMDISK_OFFSET     := 0x02000000
@@ -210,8 +203,7 @@ TARGET_USES_SDCLANG := true
 
 # SHIM
 TARGET_LD_SHIM_LIBS := /vendor/lib/libqomx_jpegenc.so|libboringssl-compat.so \
-    /vendor/lib/hw/camera.msm8916.so|libzte_camera.so \
-    /vendor/lib/libskia.so|libshim_skia.so
+        /vendor/lib/libskia.so|libshim_skia.so
 
 
 # VNDK-SP:
