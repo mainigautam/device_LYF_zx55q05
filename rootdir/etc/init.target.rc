@@ -35,142 +35,47 @@ on boot
     chown system system /sys/devices/virtual/touchscreen/touchscreen_dev/firmware_update
     chown system system /sys/devices/virtual/touchscreen/touchscreen_dev/calibrate
 
-    #proximity sensor
-    chown system system /sys/class/proximity/proximity/chip_name
-    chown system system /sys/class/proximity/proximity/prox_check
-    chown system system /sys/class/proximity/proximity/enable
-    chown system system /sys/class/proximity/proximity/prox_init
-    chown system system /sys/class/proximity/proximity/prox_led_pluse_cnt
-    chown system system /sys/class/proximity/proximity/prox_adc_time
-    chown system system /sys/class/proximity/proximity/prox_led_strength_level
-    chown system system /sys/class/proximity/proximity/prox_debug_delay
-    chown system system /sys/class/proximity/proximity/prox_calibrate
-    chown system system /sys/class/proximity/proximity/prox_threshold_high
-    chown system system /sys/class/proximity/proximity/prox_threshold_low
-    chown system system /sys/class/proximity/proximity/prox_offset
-    chown system system /sys/class/proximity/proximity/prox_calibrate_result
-    chown system system /sys/class/proximity/proximity/prox_thres_param_high
-    chown system system /sys/class/proximity/proximity/prox_thres_param_low
-    chown system system /sys/class/proximity/proximity/prox_thres
-    chown system system /sys/class/proximity/proximity/prox_debug
-    chown system system /sys/class/proximity/proximity/prox_calibrate_start
-    chown system system /sys/class/proximity/proximity/prox_thres_max
-    chown system system /sys/class/proximity/proximity/prox_thres_min
-    chown system system /sys/class/proximity/proximity/prox_data_max
-    chown system system /sys/class/proximity/proximity/prox_manual_calibrate_threshold
-    chown system system /sys/class/proximity/proximity/prox_wakelock
-    chown system system /sys/class/proximity/proximity/irq_status
-    chown system system /sys/class/proximity/proximity/wait_time
-    chown system system /sys/class/proximity/proximity/prox_offset_cal_start
-    chown system system /sys/class/proximity/proximity/prox_offset_cal
-    chown system system /sys/class/proximity/proximity/prox_offset_cal_result
-    chown system system /sys/class/proximity/proximity/prox_data_safe_range_max
-    chown system system /sys/class/proximity/proximity/prox_data_safe_range_min
-    chown system system /sys/class/proximity/proximity/prox_offset_cal_verify
-    chown system system /sys/class/proximity/proximity/prox_calibrate_verify
+    # stk3x1x light
+    chown system system /sys/class/sensors/stk3x1x-light/calibrate
+    chown system system /sys/class/sensors/stk3x1x-light/enable
+    chown system system /sys/class/sensors/stk3x1x-light/enable_wakeup
+    chown system system /sys/class/sensors/stk3x1x-light/flush
+    chown system system /sys/class/sensors/stk3x1x-light/max_latency
+    chown system system /sys/class/sensors/stk3x1x-light/poll_delay
+    chmod 0664 /sys/class/sensors/stk3x1x-light/calibrate
+    chmod 0664 /sys/class/sensors/stk3x1x-light/enable
+    chmod 0664 /sys/class/sensors/stk3x1x-light/enable_wakeup
+    chmod 0664 /sys/class/sensors/stk3x1x-light/flush
+    chmod 0664 /sys/class/sensors/stk3x1x-light/max_latency
+    chmod 0664 /sys/class/sensors/stk3x1x-light/poll_delay
 
-    chmod 0444 /sys/class/proximity/proximity/chip_name
-    chmod 0444 /sys/class/proximity/proximity/prox_check
-    chmod 0644 /sys/class/proximity/proximity/enable
-    chmod 0200 /sys/class/proximity/proximity/prox_init
-    chmod 0644 /sys/class/proximity/proximity/prox_led_pluse_cnt
-    chmod 0644 /sys/class/proximity/proximity/prox_adc_time
-    chmod 0644 /sys/class/proximity/proximity/prox_led_strength_level
-    chmod 0644 /sys/class/proximity/proximity/prox_debug_delay
-    chmod 0200 /sys/class/proximity/proximity/prox_calibrate
-    chmod 0644 /sys/class/proximity/proximity/prox_threshold_high
-    chmod 0644 /sys/class/proximity/proximity/prox_threshold_low
-    chmod 0644 /sys/class/proximity/proximity/prox_offset
-    chmod 0444 /sys/class/proximity/proximity/prox_calibrate_result
-    chmod 0644 /sys/class/proximity/proximity/prox_thres_param_high
-    chmod 0644 /sys/class/proximity/proximity/prox_thres_param_low
-    chmod 0644 /sys/class/proximity/proximity/prox_thres
-    chmod 0644 /sys/class/proximity/proximity/prox_debug
-    chmod 0644 /sys/class/proximity/proximity/prox_calibrate_start
-    chmod 0444 /sys/class/proximity/proximity/prox_thres_max
-    chmod 0444 /sys/class/proximity/proximity/prox_thres_min
-    chmod 0444 /sys/class/proximity/proximity/prox_data_max
-    chmod 0444 /sys/class/proximity/proximity/prox_manual_calibrate_threshold
-    chmod 0644 /sys/class/proximity/proximity/prox_wakelock
-    chmod 0644 /sys/class/proximity/proximity/irq_status
-    chmod 0644 /sys/class/proximity/proximity/wait_time
-    chmod 0644 /sys/class/proximity/proximity/prox_offset_cal_start
-    chmod 0644 /sys/class/proximity/proximity/prox_offset_cal
-    chmod 0444 /sys/class/proximity/proximity/prox_offset_cal_result
-    chmod 0444 /sys/class/proximity/proximity/prox_data_safe_range_max
-    chmod 0444 /sys/class/proximity/proximity/prox_data_safe_range_min
-    chmod 0644 /sys/class/proximity/proximity/prox_offset_cal_verify
-    chmod 0644 /sys/class/proximity/proximity/prox_calibrate_verify
+    # stk3x1x proximity
+    chown system system /sys/class/sensors/stk3x1x-proximity/calibrate
+    chown system system /sys/class/sensors/stk3x1x-proximity/enable
+    chown system system /sys/class/sensors/stk3x1x-proximity/enable_wakeup
+    chown system system /sys/class/sensors/stk3x1x-proximity/flush
+    chown system system /sys/class/sensors/stk3x1x-proximity/max_latency
+    chown system system /sys/class/sensors/stk3x1x-proximity/poll_delay
+    chmod 0664 /sys/class/sensors/stk3x1x-proximity/calibrate
+    chmod 0664 /sys/class/sensors/stk3x1x-proximity/enable
+    chmod 0664 /sys/class/sensors/stk3x1x-proximity/enable_wakeup
+    chmod 0664 /sys/class/sensors/stk3x1x-proximity/flush
+    chmod 0664 /sys/class/sensors/stk3x1x-proximity/max_latency
+    chmod 0664 /sys/class/sensors/stk3x1x-proximity/poll_delay
 
-    #boot sound
-    chmod 0664 /system/media/audio/ui/bootup.wav
-    chmod 0755 /system/bin/bootsound.sh
-
-    #light sensor
-    chown system system /sys/class/light/light/light_check
-    chown system system /sys/class/light/light/enable
-    chown system system /sys/class/light/light/delay
-    chmod 0444 /sys/class/light/light/light_check
-    chmod 0644 /sys/class/light/light/enable
-    chmod 0644 /sys/class/light/light/delay
-
-    #compass
-    chown system system /sys/class/compass/compass/accel
-    chmod 0640 /sys/class/compass/compass/accel
-
-    chown system system /sys/class/compass/compass/mag_check
-    chown system system /sys/class/compass/compass/enable_acc
-    chown system system /sys/class/compass/compass/enable_mag
-    chown system system /sys/class/compass/compass/enable_fusion
-    chown system system /sys/class/compass/compass/enable_ori
-    chown system system /sys/class/compass/compass/enable_unmag
-    chown system system /sys/class/compass/compass/enable_geomag
-    chown system system /sys/class/compass/compass/delay_acc
-    chown system system /sys/class/compass/compass/delay_mag
-    chown system system /sys/class/compass/compass/delay_ori
-
-    chmod 0444 /sys/class/compass/compass/mag_check
-    chmod 0644 /sys/class/compass/compass/enable_acc
-    chmod 0644 /sys/class/compass/compass/enable_mag
-    chmod 0644 /sys/class/compass/compass/enable_fusion
-    chmod 0644 /sys/class/compass/compass/enable_ori
-    chmod 0644 /sys/class/compass/compass/enable_unmag
-    chmod 0644 /sys/class/compass/compass/enable_geomag
-    chmod 0644 /sys/class/compass/compass/delay_acc
-    chmod 0644 /sys/class/compass/compass/delay_mag
-    chmod 0644 /sys/class/compass/compass/delay_ori
-
-    #acc
-    chown system system /sys/class/acc/acc/acc_check
-    chown system system /sys/class/acc/acc/enable
-    chown system system /sys/class/acc/acc/delay
-
-    chmod 0444 /sys/class/acc/acc/acc_check
-    chmod 0644 /sys/class/acc/acc/enable
-    chmod 0644 /sys/class/acc/acc/delay
-
-    chown system system /sys/class/acc/acc/range
-    chown system system /sys/class/acc/acc/enable_device
-    chown system system /sys/class/acc/acc/pollrate_ms
-
-    chmod 0644 /sys/class/acc/acc/range
-    chmod 0644 /sys/class/acc/acc/enable_device
-    chmod 0644 /sys/class/acc/acc/pollrate_ms
-
-    #gyro
-    chown system system /sys/class/gyro/gyro/gyro_check
-    chown system system /sys/class/gyro/gyro/range
-    chown system system /sys/class/gyro/gyro/enable_device
-    chown system system /sys/class/gyro/gyro/pollrate_ms
-
-    chmod 0444 /sys/class/gyro/gyro/gyro_check
-    chmod 0644 /sys/class/gyro/gyro/range
-    chmod 0644 /sys/class/gyro/gyro/enable_device
-    chmod 0644 /sys/class/gyro/gyro/pollrate_ms
-
-    mkdir /persist/proxdata 0755 system system
-    chown system system /persist/proxdata
-    chmod 0755 /persist/proxdata
+    # BMA
+    chown system system /sys/class/sensors/bma2x2-accel/calibrate
+    chown system system /sys/class/sensors/bma2x2-accel/enable
+    chown system system /sys/class/sensors/bma2x2-accel/enable_wakeup
+    chown system system /sys/class/sensors/bma2x2-accel/flush
+    chown system system /sys/class/sensors/bma2x2-accel/max_latency
+    chown system system /sys/class/sensors/bma2x2-accel/poll_delay
+    chmod 0664 /sys/class/sensors/bma2x2-accel/calibrate
+    chmod 0664 /sys/class/sensors/bma2x2-accel/enable
+    chmod 0664 /sys/class/sensors/bma2x2-accel/enable_wakeup
+    chmod 0664 /sys/class/sensors/bma2x2-accel/flush
+    chmod 0664 /sys/class/sensors/bma2x2-accel/max_latency
+    chmod 0664 /sys/class/sensors/bma2x2-accel/poll_delay
 
     #hall_device
     chown system system /sys/class/hall_device/hall_device/hall_check
@@ -238,6 +143,10 @@ service vendor.start_hci_filter /vendor/bin/wcnss_filter
     group bluetooth diag system wakelock
     seclabel u:r:bluetooth:s0
     disabled
+    
+service sensord /vendor/bin/sensord
+    class main
+    user root
 
 # Add a cpuset for the camera daemon
 # We want all cores for camera
