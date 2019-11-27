@@ -283,16 +283,9 @@ PRODUCT_PACKAGES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-impl-nubia \
-    calmodule.cfg \
-    libcalmodule_akm \
-    libcalmodule_common \
-    libcalmodule_gyroscope \
-    sensors.nubia \
+    android.hardware.sensors@1.0-impl \
+    android.hardware.sensors@1.0-service.zx55q05 \
     sensors.msm8916
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/sensors/_hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/_hals.conf
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml \
@@ -357,14 +350,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libqsap_sdk \
     libQWiFiSoftApCfg \
-    libwcnss_qmi \
-    wcnss_service \
-    libwpa_client
-
-PRODUCT_PACKAGES += \
+    libwpa_client \
     hostapd \
     wpa_supplicant \
-    wpa_supplicant.conf
+    wpa_supplicant.conf \
+    libwcnss_qmi \
+    wcnss_service
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/prima/WCNSS_cfg.dat \
