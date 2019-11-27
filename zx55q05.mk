@@ -368,6 +368,12 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml
 
+# Hotspot
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/hostapd.accept:system/etc/hostapd/hostapd.accept \
+    $(LOCAL_PATH)/configs/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf \
+    $(LOCAL_PATH)/configs/hostapd.deny:system/etc/hostapd/hostapd.deny
+
 # Telephony
 PRODUCT_PACKAGES += telephony-ext
 PRODUCT_BOOT_JARS += telephony-ext
