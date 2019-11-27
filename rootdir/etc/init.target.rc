@@ -35,48 +35,6 @@ on boot
     chown system system /sys/devices/virtual/touchscreen/touchscreen_dev/firmware_update
     chown system system /sys/devices/virtual/touchscreen/touchscreen_dev/calibrate
 
-    # stk3x1x light
-    chown system system /sys/class/sensors/stk3x1x-light/calibrate
-    chown system system /sys/class/sensors/stk3x1x-light/enable
-    chown system system /sys/class/sensors/stk3x1x-light/enable_wakeup
-    chown system system /sys/class/sensors/stk3x1x-light/flush
-    chown system system /sys/class/sensors/stk3x1x-light/max_latency
-    chown system system /sys/class/sensors/stk3x1x-light/poll_delay
-    chmod 0664 /sys/class/sensors/stk3x1x-light/calibrate
-    chmod 0664 /sys/class/sensors/stk3x1x-light/enable
-    chmod 0664 /sys/class/sensors/stk3x1x-light/enable_wakeup
-    chmod 0664 /sys/class/sensors/stk3x1x-light/flush
-    chmod 0664 /sys/class/sensors/stk3x1x-light/max_latency
-    chmod 0664 /sys/class/sensors/stk3x1x-light/poll_delay
-
-    # stk3x1x proximity
-    chown system system /sys/class/sensors/stk3x1x-proximity/calibrate
-    chown system system /sys/class/sensors/stk3x1x-proximity/enable
-    chown system system /sys/class/sensors/stk3x1x-proximity/enable_wakeup
-    chown system system /sys/class/sensors/stk3x1x-proximity/flush
-    chown system system /sys/class/sensors/stk3x1x-proximity/max_latency
-    chown system system /sys/class/sensors/stk3x1x-proximity/poll_delay
-    chmod 0664 /sys/class/sensors/stk3x1x-proximity/calibrate
-    chmod 0664 /sys/class/sensors/stk3x1x-proximity/enable
-    chmod 0664 /sys/class/sensors/stk3x1x-proximity/enable_wakeup
-    chmod 0664 /sys/class/sensors/stk3x1x-proximity/flush
-    chmod 0664 /sys/class/sensors/stk3x1x-proximity/max_latency
-    chmod 0664 /sys/class/sensors/stk3x1x-proximity/poll_delay
-
-    # BMA
-    chown system system /sys/class/sensors/bma2x2-accel/calibrate
-    chown system system /sys/class/sensors/bma2x2-accel/enable
-    chown system system /sys/class/sensors/bma2x2-accel/enable_wakeup
-    chown system system /sys/class/sensors/bma2x2-accel/flush
-    chown system system /sys/class/sensors/bma2x2-accel/max_latency
-    chown system system /sys/class/sensors/bma2x2-accel/poll_delay
-    chmod 0664 /sys/class/sensors/bma2x2-accel/calibrate
-    chmod 0664 /sys/class/sensors/bma2x2-accel/enable
-    chmod 0664 /sys/class/sensors/bma2x2-accel/enable_wakeup
-    chmod 0664 /sys/class/sensors/bma2x2-accel/flush
-    chmod 0664 /sys/class/sensors/bma2x2-accel/max_latency
-    chmod 0664 /sys/class/sensors/bma2x2-accel/poll_delay
-
     #hall_device
     chown system system /sys/class/hall_device/hall_device/hall_check
     chown system system /sys/class/hall_device/hall_device/enable
