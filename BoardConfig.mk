@@ -53,6 +53,9 @@ TARGET_KERNEL_CONFIG := zx55q05_defconfig
 # Properties
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 
+# Lights
+TARGET_PROVIDES_LIBLIGHT := true
+
 # Recovery
 TARGET_RECOVERY_DENSITY := xhdpi
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
