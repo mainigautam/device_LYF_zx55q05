@@ -93,8 +93,8 @@ include $(BUILD_SHARED_LIBRARY)
 include $(CLEAR_VARS)
 LOCAL_MODULE_RELATIVE_PATH := hw
 LOCAL_PROPRIETARY_MODULE := true
-LOCAL_MODULE := android.hardware.sensors@1.0-service.mobee01a
-LOCAL_INIT_RC := android.hardware.sensors@1.0-service.mobee01a.rc
+LOCAL_MODULE := android.hardware.sensors@1.0-service.zx55q05
+LOCAL_INIT_RC := android.hardware.sensors@1.0-service.zx55q05.rc
 LOCAL_SRC_FILES := \
         service.cpp \
 

@@ -18,12 +18,12 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Inherit from mobee01a device
-$(call inherit-product, device/LYF/mobee01a/device.mk)
+# Inherit from zx55q05 device
+$(call inherit-product, device/LYF/zx55q05/device.mk)
 
 # Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := mobee01a
-PRODUCT_NAME := full_mobee01a
+PRODUCT_DEVICE := zx55q05
+PRODUCT_NAME := full_zx55q05
 PRODUCT_BRAND := LYF
-PRODUCT_MODEL := Water 8
+PRODUCT_MODEL := Water 7
 PRODUCT_MANUFACTURER := LYF

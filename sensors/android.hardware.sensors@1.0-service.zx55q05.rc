@@ -55,7 +55,7 @@ on init
     chmod 0664 /sys/class/sensors/lsm6ds3_gyroscope/max_latency
     chmod 0664 /sys/class/sensors/lsm6ds3_gyroscope/poll_delay
 
-service sensors-hal-1-0 /vendor/bin/hw/android.hardware.sensors@1.0-service.mobee01a
+service sensors-hal-1-0 /vendor/bin/hw/android.hardware.sensors@1.0-service.zx55q05
     class hal
     user system
     group system input wakelock

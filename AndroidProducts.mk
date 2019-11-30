@@ -14,4 +14,4 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/full_mobee01a.mk
+    $(LOCAL_DIR)/full_zx55q05.mk
