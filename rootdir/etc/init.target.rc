@@ -90,6 +90,19 @@ on boot
     chown system system /sys/class/leds/red/led_time
     chown system system /sys/class/leds/green/led_time
     chown system system /sys/class/leds/blue/led_time
+    
+    # access permission for secure touch
+    chmod 0660 /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0020/secure_touch_enable
+    chmod 0440 /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0020/secure_touch
+    chmod 0660 /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0070/secure_touch_enable
+    chmod 0440 /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0070/secure_touch
+    chown system drmrpc /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0020/secure_touch_enable
+    chown system drmrpc /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0020/secure_touch
+    chown system drmrpc /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0070/secure_touch_enable
+    chown system drmrpc /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0070/secure_touch
+    # add by vim
+    chmod 0666 /dev/esfp0
+    # end by vim
 
 
 service baseband-sh /system/bin/sh /system/etc/set_baseband.sh
