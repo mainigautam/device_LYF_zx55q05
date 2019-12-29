@@ -29,33 +29,34 @@ on init
     export LD_PRELOAD "libshim_atomic.so"
 
 on boot
-     # ltr553 light
-    chown system system /sys/class/sensors/ltr553_light/calibrate
-    chown system system /sys/class/sensors/ltr553_light/enable
-    chown system system /sys/class/sensors/ltr553_light/enable_wakeup
-    chown system system /sys/class/sensors/ltr553_light/flush
-    chown system system /sys/class/sensors/ltr553_light/max_latency
-    chown system system /sys/class/sensors/ltr553_light/poll_delay
-    chmod 0664 /sys/class/sensors/ltr553_light/calibrate
-    chmod 0664 /sys/class/sensors/ltr553_light/enable
-    chmod 0664 /sys/class/sensors/ltr553_light/enable_wakeup
-    chmod 0664 /sys/class/sensors/ltr553_light/flush
-    chmod 0664 /sys/class/sensors/ltr553_light/max_latency
-    chmod 0664 /sys/class/sensors/ltr553_light/poll_delay
 
-    # ltr553 proximity
-    chown system system /sys/class/sensors/ltr553_proximity/calibrate
-    chown system system /sys/class/sensors/ltr553_proximity/enable
-    chown system system /sys/class/sensors/ltr553_proximity/enable_wakeup
-    chown system system /sys/class/sensors/ltr553_proximity/flush
-    chown system system /sys/class/sensors/ltr553_proximity/max_latency
-    chown system system /sys/class/sensors/ltr553_proximity/poll_delay
-    chmod 0664 /sys/class/sensors/ltr553_proximity/calibrate
-    chmod 0664 /sys/class/sensors/ltr553_proximity/enable
-    chmod 0664 /sys/class/sensors/ltr553_proximity/enable_wakeup
-    chmod 0664 /sys/class/sensors/ltr553_proximity/flush
-    chmod 0664 /sys/class/sensors/ltr553_proximity/max_latency
-    chmod 0664 /sys/class/sensors/ltr553_proximity/poll_delay
+    # ap3426 light
+    chown system system /sys/class/sensors/ap3426_light/calibrate
+    chown system system /sys/class/sensors/ap3426_light/enable
+    chown system system /sys/class/sensors/ap3426_light/enable_wakeup
+    chown system system /sys/class/sensors/ap3426_light/flush
+    chown system system /sys/class/sensors/ap3426_light/max_latency
+    chown system system /sys/class/sensors/ap3426_light/poll_delay
+    chmod 0664 /sys/class/sensors/ap3426_light/calibrate
+    chmod 0664 /sys/class/sensors/ap3426_light/enable
+    chmod 0664 /sys/class/sensors/ap3426_light/enable_wakeup
+    chmod 0664 /sys/class/sensors/ap3426_light/flush
+    chmod 0664 /sys/class/sensors/ap3426_light/max_latency
+    chmod 0664 /sys/class/sensors/ap3426_light/poll_delay
+
+    # ap3426 proximity
+    chown system system /sys/class/sensors/ap3426_proximity/calibrate
+    chown system system /sys/class/sensors/ap3426_proximity/enable
+    chown system system /sys/class/sensors/ap3426_proximity/enable_wakeup
+    chown system system /sys/class/sensors/ap3426_proximity/flush
+    chown system system /sys/class/sensors/ap3426_proximity/max_latency
+    chown system system /sys/class/sensors/ap3426_proximity/poll_delay
+    chmod 0664 /sys/class/sensors/ap3426_proximity/calibrate
+    chmod 0664 /sys/class/sensors/ap3426_proximity/enable
+    chmod 0664 /sys/class/sensors/ap3426_proximity/enable_wakeup
+    chmod 0664 /sys/class/sensors/ap3426_proximity/flush
+    chmod 0664 /sys/class/sensors/ap3426_proximity/max_latency
+    chmod 0664 /sys/class/sensors/ap3426_proximity/poll_delay
 
     # Accelerator
     chown system system /sys/class/sensors/lsm6ds3_accelerometer/calibrate
@@ -85,9 +86,27 @@ on boot
     chmod 0664 /sys/class/sensors/lsm6ds3_gyroscope/max_latency
     chmod 0664 /sys/class/sensors/lsm6ds3_gyroscope/poll_delay
 
-    # Touchscreen
-    chown system system /sys/mip4_ts/wakeup_gesture
-    chmod 0660 /sys/mip4_ts/wakeup_gesture
+     # Enable writing to led blink node from userspace
+    chown system system /sys/class/leds/red/blink
+    chown system system /sys/class/leds/green/blink
+    chown system system /sys/class/leds/blue/blink
+    chown system system /sys/class/leds/red/led_time
+    chown system system /sys/class/leds/green/led_time
+    chown system system /sys/class/leds/blue/led_time
+
+    # access permission for secure touch
+    chmod 0660 /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0020/secure_touch_enable
+    chmod 0440 /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0020/secure_touch
+    chmod 0660 /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0070/secure_touch_enable
+    chmod 0440 /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0070/secure_touch
+    chown system drmrpc /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0020/secure_touch_enable
+    chown system drmrpc /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0020/secure_touch
+    chown system drmrpc /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0070/secure_touch_enable
+    chown system drmrpc /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0070/secure_touch
+    # add by vim
+    chmod 0666 /dev/esfp0
+    # end by vim
+
 
 on init
 

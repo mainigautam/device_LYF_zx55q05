@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
     Copyright (c) 2014, The Linux Foundation. All rights reserved.
-
     Redistribution and use in source and binary forms, with or without
     modification, are permitted provided that the following conditions are
     met:
@@ -14,7 +13,6 @@
         * Neither the name of The Linux Foundation nor the names of its
           contributors may be used to endorse or promote products derived
           from this software without specific prior written permission.
-
     THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
     WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
     MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
@@ -30,9 +28,6 @@
 
 <mixer>
     <!-- These are the initial mixer settings -->
-    <ctl name="Mobee Spk PA Mode" value="MODE_3" />
-    <ctl name="Ext Spk Switch" value="Off" />
-    <ctl name="Boost Option" value="BOOST_ALWAYS" />
     <ctl name="Voice Rx Device Mute" id="0" value="0" />
     <ctl name="Voice Rx Device Mute" id="1" value="-1" />
     <ctl name="Voice Rx Device Mute" id="2" value="20" />
@@ -54,9 +49,9 @@
     <ctl name="TTY Mode" value="Off" />
     <ctl name="HPHL Volume" value="9" />
     <ctl name="HPHR Volume" value="9" />
-    <ctl name="RX1 Digital Volume" value="87" />
-    <ctl name="RX2 Digital Volume" value="87" />
-    <ctl name="RX3 Digital Volume" value="87" />
+    <ctl name="RX1 Digital Volume" value="84" />
+    <ctl name="RX2 Digital Volume" value="84" />
+    <ctl name="RX3 Digital Volume" value="84" />
     <ctl name="IIR1 INP1 Volume" value="84" />
     <ctl name="IIR1 INP2 Volume" value="84" />
     <ctl name="IIR1 INP3 Volume" value="84" />
@@ -84,8 +79,8 @@
     <ctl name="HPHL" value="ZERO" />
     <ctl name="HPHR" value="ZERO" />
     <ctl name="SPK DAC Switch" value="0" />
+    <ctl name="Speaker Ext" value="DISABLE" /> 
     <ctl name="Speaker Boost" value="ENABLE" />
-    <ctl name="MICBIAS CAPLESS Switch" value="0" />
     <ctl name="EAR PA Boost" value="ENABLE" />
     <ctl name="EAR PA Gain" value="POS_1P5_DB" />
     <ctl name="MI2S_RX Channels" value="One" />
@@ -542,50 +537,59 @@
 
     <!-- These are actual sound device specific mixer settings -->
     <path name="adc1">
+		<ctl name="ADC1 Volume" value="6" />
         <ctl name="DEC1 MUX" value="ADC1" />
-        <ctl name="ADC1 Volume" value="6" />
     </path>
 
     <path name="adc2">
+		<ctl name="ADC2 Volume" value="6" />
         <ctl name="DEC1 MUX" value="ADC2" />
-        <ctl name="ADC2 MUX" value="INP2" />
-        <ctl name="ADC2 Volume" value="6" />
-        <ctl name="MICBIAS CAPLESS Switch" value="1" />
     </path>
 
     <path name="adc3">
         <ctl name="DEC1 MUX" value="ADC2" />
         <ctl name="ADC2 MUX" value="INP3" />
-        <ctl name="ADC3 Volume" value="6" />
     </path>
 
     <path name="speaker">
-        <ctl name="MI2S_RX Channels" value="Two" />
-        <ctl name="RX2 MIX1 INP2" value="RX1" />
+	<ctl name="MI2S_RX Channels" value="One" />
+        <!--ctl name="RX1 MIX1 INP1" value="RX1" /-->
         <ctl name="RX2 MIX1 INP1" value="RX2" />
         <ctl name="RDAC2 MUX" value="RX2" />
+        <!--ctl name="HPHL" value="Switch" /-->
         <ctl name="HPHR" value="Switch" />
-        <ctl name="RX1 MIX1 INP1" value="RX1" />
-        <ctl name="RX1 MIX1 INP2" value="RX2" />
-        <ctl name="HPHL" value="Switch" />
-        <ctl name="Ext Spk Switch" value="On" />
+        <ctl name="Speaker Ext" value="ENABLE" />
+        <!--ctl name="RX1 Digital Volume" value="84" /--> 
+        <ctl name="RX2 Digital Volume" value="84" />
+
+        <!--ctl name="RX3 MIX1 INP1" value="RX1" />
+        <ctl name="SPK DAC Switch" value="1" / -->
     </path>
 
     <path name="speaker-mic">
-        <path name="adc3" />
+        <path name="adc1" />
         <ctl name="IIR1 INP1 MUX" value="DEC1" />
     </path>
 
+	<!-- add by Alex deng for secondary mic test-->
+	<path name="secondary-mic"> 
+		<path name="adc2" /> 
+		<ctl name="DEC2 MUX" value="ADC2" /> 
+		<ctl name="ADC2 MUX" value="INP3" /> 
+	</path>
+	
     <path name="handset">
         <ctl name="RX1 MIX1 INP1" value="RX1" />
         <ctl name="RDAC2 MUX" value="RX1" />
-        <ctl name="RX1 Digital Volume" value="87" />
+        <ctl name="RX1 Digital Volume" value="84" />
         <ctl name="EAR PA Gain" value="POS_6_DB" />
         <ctl name="EAR_S" value="Switch" />
     </path>
 
     <path name="handset-mic">
         <path name="adc1" />
+        <ctl name="ADC1 Volume" value="21" />
+   	<ctl name="DEC1 Volume" value="84" />
         <ctl name="IIR1 INP1 MUX" value="DEC1" />
     </path>
 
@@ -600,6 +604,7 @@
 
     <path name="headset-mic">
         <path name="adc2" />
+        <ctl name="ADC2 MUX" value="INP2" />
         <ctl name="IIR1 INP1 MUX" value="DEC1" />
     </path>
 
@@ -647,8 +652,15 @@
     </path>
 
     <path name="speaker-and-headphones">
-        <path name="speaker" />
-        <path name="headphones" />
+        <!--path name="headphones" />
+        <path name="speaker" /-->
+        <ctl name="MI2S_RX Channels" value="Two" />
+        <ctl name="RX1 MIX1 INP1" value="RX1" />
+        <ctl name="RX2 MIX1 INP1" value="RX2" />
+        <ctl name="RDAC2 MUX" value="RX2" />
+        <ctl name="HPHL" value="Switch" />
+        <ctl name="HPHR" value="Switch" />
+        <ctl name="Speaker Ext" value="ENABLE" />
     </path>
 
     <path name="usb-headphones">
@@ -693,11 +705,15 @@
 
     <!-- Dual MIC devices -->
     <path name="speaker-dmic-endfire">
-        <path name="adc1" />
-        <ctl name="DEC2 MUX" value="ADC2" />
-        <ctl name="MI2S_TX Channels" value="Two" />
-        <ctl name="ADC2 MUX" value="INP3" />
-        <ctl name="ADC3 Volume" value="6" />
+    <path name="adc1" />
+	<ctl name="ADC3 Volume" value="6" />
+    <ctl name="DEC2 MUX" value="ADC2" />
+    <ctl name="MI2S_TX Channels" value="Two" />
+    <ctl name="ADC2 MUX" value="INP3" />
+    <ctl name="ADC1 Volume" value="6" />
+   	<ctl name="ADC2 Volume" value="6" />
+  	<ctl name="DEC1 Volume" value="84" />
+   	<ctl name="DEC2 Volume" value="84" />
     </path>
 
     <path name="dmic-endfire">
@@ -736,7 +752,6 @@
         <path name="adc3" />
         <ctl name="DEC2 MUX" value="ADC1" />
         <ctl name="MI2S_TX Channels" value="Two" />
-        <ctl name="ADC1 Volume" value="6" />
     </path>
 
     <path name="dmic-broadside">
@@ -775,6 +790,7 @@
 
     <path name="voice-tty-full-headset-mic">
         <path name="adc2" />
+        <ctl name="ADC2 MUX" value="INP2" />
     </path>
 
     <path name="voice-tty-hco-headset-mic">

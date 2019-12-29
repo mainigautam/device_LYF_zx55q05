@@ -23,8 +23,8 @@ LOCAL_C_INCLUDES := \
     system/core/init \
     external/selinux/libselinux/include
 LOCAL_CFLAGS := -Wall
-LOCAL_SRC_FILES := init_mobee01a.cpp
-LOCAL_MODULE := libinit_mobee01a
+LOCAL_SRC_FILES := init_zx55q05.cpp
+LOCAL_MODULE := libinit_zx55q05
 LOCAL_STATIC_LIBRARIES := libbase libselinux
 
 include $(BUILD_STATIC_LIBRARY)
