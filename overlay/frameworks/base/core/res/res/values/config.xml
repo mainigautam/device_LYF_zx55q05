@@ -96,9 +96,6 @@
     <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveNotificationLed">true</bool>
 
-    <!-- Whether device supports double tap to wake -->
-    <bool name="config_supportDoubleTapWake">true</bool>
-
     <!-- Default list of files pinned by the Pinner Service -->
     <string-array translatable="false" name="config_defaultPinnerServiceFiles">
         <item>"/system/framework/arm64/boot-framework.oat"</item>
@@ -115,6 +112,4 @@
         <item>"/data/dalvik-cache/arm64/system@framework@services.jar@classes.vdex"</item>
    </string-array>
 
-   <!-- Navigation Bar -->
-   <bool name="config_showNavigationBar">true</bool>
 </resources>
