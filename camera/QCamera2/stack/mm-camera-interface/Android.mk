@@ -11,17 +11,13 @@ LOCAL_SRC_FILES := \
     src/mm_camera_sock.c \
     src/cam_intf.c
 
-ifeq ($(strip $(TARGET_USES_ION)),true)
-    LOCAL_CFLAGS += -DUSE_ION
-endif
-
 #ckt add for M mobee plus cts test
 ifeq ($(strip $(MOBEEPLUS_ONLY_SUPPORT)),yes)
 LOCAL_CFLAGS  += -DMOBEE_PLUS
 endif
 #ckt add end
 
-ifeq ($(call is-board-platform-in-list, msm8974 msm8916 msm8226 msm8610 msm8909),true)
+ifeq ($(call is-board-platform-in-list,msm8974 msm8916 msm8226 msm8610 msm8909),true)
     LOCAL_CFLAGS += -DVENUS_PRESENT
 endif
 
@@ -34,7 +30,7 @@ LOCAL_COPY_HEADERS += ../common/cam_types.h
 LOCAL_C_INCLUDES := \
     $(LOCAL_PATH)/inc \
     $(LOCAL_PATH)/../common \
-    $(call project-path-for,qcom-media)/mm-core/inc \
+    hardware/qcom/media-caf/msm8916/mm-core/inc \
     system/media/camera/include
 
 LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
@@ -50,3 +46,4 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_VENDOR_MODULE := true
 
 include $(BUILD_SHARED_LIBRARY)
+
