@@ -13,26 +13,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$(call inherit-product, device/LYF/mobee01a/full_mobee01a.mk)
+$(call inherit-product, device/LYF/zx55q05/full_zx55q05.mk)
 
 # Inherit some common LineageOS stuff.
-$(call inherit-product, vendor/caf/config/common.mk)
+$(call inherit-product, vendor/oneos/config/common.mk)
 
 # Must define platform variant before including any common things
 TARGET_BOARD_PLATFORM_VARIANT := msm8939
 
-PRODUCT_NAME := aosp_mobee01a
+PRODUCT_NAME := one_zx55q05
 BOARD_VENDOR := LYF
-PRODUCT_DEVICE := mobee01a
+PRODUCT_DEVICE := zx55q05
 
 TARGET_GAPPS_ARCH := arm64
-TARGET_BOOT_ANIMATION_RES := 720
+TARGET_BOOT_ANIMATION_RES := 1080
 
-PRODUCT_GMS_CLIENTID_BASE := android-ckt
+PRODUCT_GMS_CLIENTID_BASE := android-zte
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="mobee01a_msm8916_64-user 6.0.1 MMB29M 913 release-keys" \
-    PRODUCT_NAME=LS-5015 \
-    TARGET_DEVICE=LS-5015
+    PRIVATE_BUILD_DESC="zx55q05_64-user 5.1.1 LMY47V LS-5504_J144_20160629.165959 release-keys" \
+    PRODUCT_NAME=LS-5504 \
+    TARGET_DEVICE=LS-5504
 
-BUILD_FINGERPRINT := LYF/LS-5015/LS-5015:6.0.1/MMB29M/434:user/release-keys
+BUILD_FINGERPRINT := LYF/zx55q05_64/zx55q05_64:5.1.1/LMY47V/LS-5504_J144_20160629.165959:user/release-keys
