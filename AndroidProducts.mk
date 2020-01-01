@@ -14,4 +14,4 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/aosp_zx55q05.mk
+    $(LOCAL_DIR)/one_zx55q05.mk
