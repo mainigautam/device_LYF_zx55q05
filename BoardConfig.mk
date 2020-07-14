@@ -34,8 +34,7 @@ TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
 BOARD_CAMERA_SENSORS := t4kb3_mcnex ov5670_q5v41b	
 
 TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
-	/vendor/bin/mm-qcamera-daemon=22
-    
+	/vendor/bin/mm-qcamera-daemon=25     
 
 # Filesystem
 BOARD_FLASH_BLOCK_SIZE := 131072
